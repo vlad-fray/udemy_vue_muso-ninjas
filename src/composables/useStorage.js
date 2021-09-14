@@ -10,7 +10,8 @@ const useStorage = () => {
   const filePath = ref(null);
 
   const uploadImage = async (file) => {
-    filePath.value = `covers/${user.value.uid}/${file.name}`;
+    const randomPostfix = Math.round(Math.random() * 10000);
+    filePath.value = `covers/${user.value.uid}/${file.name}${randomPostfix}`;
     const storageRef = projectStorage.ref(filePath.value);
 
     try {

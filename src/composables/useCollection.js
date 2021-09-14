@@ -9,8 +9,11 @@ const useCollection = (collection) => {
     error.value = null;
     isPending.value = true;
     try {
-      await projectFirestore.collection(collection).add(doc);
+      const res = await projectFirestore
+        .collection(collection)
+        .add(doc);
       isPending.value = false;
+      return res;
     } catch (err) {
       console.error(err.message);
       error.value = 'Failed sending a message';
