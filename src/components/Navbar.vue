@@ -4,10 +4,18 @@
       <img src="@/assets/ninja.png" alt="ninja img" />
       <h1><router-link :to="{ name: 'Home' }">Muso Ninja</router-link></h1>
       <div class="links">
-        <button v-if="!isPending" @click="handleLogout">Logout</button>
-        <button v-if="isPending" disabled>Logging out...</button>
-        <router-link class="btn" :to="{ name: 'Signup' }">Sign up</router-link>
-        <router-link class="btn" :to="{ name: 'Login' }">Log in</router-link>
+        <div v-if="user">
+          <router-link :to="{ name: 'CreatePlaylist' }">
+            Create Playlist
+          </router-link>
+          <button @click="handleLogout">Logout</button>
+        </div>
+        <div v-if="!user">
+          <router-link class="btn" :to="{ name: 'Signup' }">
+            Sign up
+          </router-link>
+          <router-link class="btn" :to="{ name: 'Login' }">Log in</router-link>
+        </div>
       </div>
     </nav>
   </div>
@@ -15,17 +23,20 @@
 
 <script>
 import useLogout from "@/composables/useLogout.js";
+import getUser from "@/composables/getUser.js";
 import { useRouter } from "vue-router";
+
 export default {
   setup() {
     const { logout, isPending } = useLogout();
+    const { user } = getUser();
     const router = useRouter();
     const handleLogout = async () => {
       await logout();
       router.push("/login");
     };
 
-    return { isPending, handleLogout };
+    return { handleLogout, user };
   },
 };
 </script>

@@ -67,6 +67,10 @@ textarea {
   margin: 20px auto;
 }
 
+textarea {
+  resize: none;
+}
+
 /* error text */
 .error {
   color: var(--warning);
