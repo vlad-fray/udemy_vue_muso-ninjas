@@ -23,7 +23,7 @@ export default {
     const handleSubmit = async () => {
       const res = await signup(email.value, password.value, displayName.value);
 
-      if (!error.value) console.log("User signed up");
+      if (!error.value) router.push("/");
     };
     return { displayName, email, password, error, handleSubmit, isPending };
   },

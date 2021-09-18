@@ -10,8 +10,8 @@ const useStorage = () => {
   const filePath = ref(null);
 
   const uploadImage = async (file) => {
-    const randomPostfix = Math.round(Math.random() * 10000);
-    filePath.value = `covers/${user.value.uid}/${file.name}${randomPostfix}`;
+    const randomPrefix = Math.round(Math.random() * 10000);
+    filePath.value = `covers/${user.value.uid}/${randomPrefix}${file.name}`;
     const storageRef = projectStorage.ref(filePath.value);
 
     try {
@@ -24,7 +24,19 @@ const useStorage = () => {
     }
   };
 
-  return { url, filePath, error, uploadImage };
+  const deleteImage = async (path) => {
+    const storageRef = projectStorage.ref(path);
+
+    try {
+      const res = await storageRef.delete();
+      error.value = null;
+    } catch (err) {
+      console.log(err.message);
+      error.value = error.message;
+    }
+  };
+
+  return { url, filePath, error, uploadImage, deleteImage };
 };
 
 export default useStorage;
