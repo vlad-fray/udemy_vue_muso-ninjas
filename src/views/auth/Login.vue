@@ -22,7 +22,7 @@ export default {
     const handleSubmit = async () => {
       const res = await login(email.value, password.value);
 
-      if (!error.value) router.push("/");
+      if (!error.value) router.push({ name: "UserPlaylists" });
     };
     return { email, password, error, handleSubmit, isPending };
   },

@@ -13,17 +13,20 @@
 <script>
 import useSignup from "@/composables/useSignup.js";
 import { ref } from "@vue/reactivity";
+import { useRouter } from "vue-router";
+
 export default {
   setup() {
     const { error, signup, isPending } = useSignup();
     const email = ref("");
     const password = ref("");
     const displayName = ref("");
+    const router = useRouter();
 
     const handleSubmit = async () => {
       const res = await signup(email.value, password.value, displayName.value);
 
-      if (!error.value) router.push("/");
+      if (!error.value) router.push({ name: "UserPlaylists" });
     };
     return { displayName, email, password, error, handleSubmit, isPending };
   },

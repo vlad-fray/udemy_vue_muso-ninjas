@@ -27,7 +27,6 @@ const useDocuments = (collection, id) => {
     isPending.value = true;
 
     try {
-      console.log(updates);
       const res = await docRef.update(updates);
 
       isPending.value = false;

@@ -5,9 +5,13 @@
       <h1><router-link :to="{ name: 'Home' }">Muso Ninja</router-link></h1>
       <div class="links">
         <div v-if="user">
+          <router-link :to="{ name: 'UserPlaylists' }">
+            My playlists
+          </router-link>
           <router-link :to="{ name: 'CreatePlaylist' }">
             Create Playlist
           </router-link>
+          <span>Hi there, {{ user.displayName }}</span>
           <button @click="handleLogout">Logout</button>
         </div>
         <div v-if="!user">
@@ -66,5 +70,13 @@ nav .links a,
 button {
   margin-left: 16px;
   font-size: 14px;
+}
+
+span {
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 1px solid #eee;
 }
 </style>
